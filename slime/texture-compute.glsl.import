@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://bbbbf0cjt5qkp"
+path="res://.godot/imported/texture-compute.glsl-e2d503a41c440e6d02828080fd2a27c1.res"
+
+[deps]
+
+source_file="res://slime/texture-compute.glsl"
+dest_files=["res://.godot/imported/texture-compute.glsl-e2d503a41c440e6d02828080fd2a27c1.res"]
+
+[params]
+

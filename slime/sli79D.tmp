@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxena148uhb2t"]
+
+[ext_resource type="Script" path="res://2d-scenes/slime/slime.gd" id="1_kojx6"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_pncic"]
+
+[node name="slime" type="Node2D"]
+script = ExtResource("1_kojx6")
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = SubResource("ImageTexture_pncic")
+
+[node name="camera" type="Camera2D" parent="."]

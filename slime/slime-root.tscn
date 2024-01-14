@@ -1,0 +1,578 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxena148uhb2t"]
+
+[ext_resource type="Script" path="res://slime/slime-root.gd" id="1_ns8ps"]
+[ext_resource type="Material" uid="uid://cb3daufwl4lqb" path="res://resources/materials/color-map.material" id="2_crj0u"]
+[ext_resource type="Script" path="res://slime/slime.gd" id="3_8u5je"]
+[ext_resource type="Script" path="res://slime/utils/player.gd" id="4_jecau"]
+[ext_resource type="Script" path="res://slime/utils/agents.gd" id="5_yv16m"]
+
+[sub_resource type="Texture2DRD" id="Texture2DRD_cjylm"]
+
+[node name="slime-root" type="Node2D"]
+script = ExtResource("1_ns8ps")
+
+[node name="slime" type="Sprite2D" parent="."]
+material = ExtResource("2_crj0u")
+texture = SubResource("Texture2DRD_cjylm")
+script = ExtResource("3_8u5je")
+
+[node name="camera" type="Camera2D" parent="slime"]
+zoom = Vector2(1.1, 1.1)
+
+[node name="player" type="Node" parent="slime"]
+script = ExtResource("4_jecau")
+
+[node name="agents" type="Node" parent="slime"]
+script = ExtResource("5_yv16m")
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+[node name="starting_panel" type="PanelContainer" parent="ui"]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 234.0
+grow_vertical = 2
+
+[node name="margin" type="MarginContainer" parent="ui/starting_panel"]
+layout_mode = 2
+
+[node name="vbox" type="VBoxContainer" parent="ui/starting_panel/margin"]
+layout_mode = 2
+
+[node name="title" type="Label" parent="ui/starting_panel/margin/vbox"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Initial Parameters"
+horizontal_alignment = 1
+
+[node name="separator" type="HSeparator" parent="ui/starting_panel/margin/vbox"]
+layout_mode = 2
+
+[node name="start_position" type="Label" parent="ui/starting_panel/margin/vbox"]
+layout_mode = 2
+text = "Starting Positions"
+
+[node name="start_position_options" type="OptionButton" parent="ui/starting_panel/margin/vbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+selected = 0
+popup/item_0/text = "Disk"
+popup/item_0/id = 0
+popup/item_1/text = "Rectangle"
+popup/item_1/id = 1
+popup/item_2/text = "Single Point"
+popup/item_2/id = 2
+
+[node name="start_angle" type="Label" parent="ui/starting_panel/margin/vbox"]
+layout_mode = 2
+text = "Starting Angles"
+
+[node name="start_angle_options" type="OptionButton" parent="ui/starting_panel/margin/vbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+selected = 0
+popup/item_0/text = "Towards Center"
+popup/item_0/id = 0
+popup/item_1/text = "Away From Center"
+popup/item_1/id = 1
+popup/item_2/text = "Random"
+popup/item_2/id = 2
+
+[node name="separator2" type="HSeparator" parent="ui/starting_panel/margin/vbox"]
+layout_mode = 2
+
+[node name="screen_size" type="HBoxContainer" parent="ui/starting_panel/margin/vbox"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="ui/starting_panel/margin/vbox/screen_size"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Screen Size"
+
+[node name="resolution" type="Label" parent="ui/starting_panel/margin/vbox/screen_size"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1280 x 720"
+horizontal_alignment = 1
+
+[node name="screen_size_slider" type="HSlider" parent="ui/starting_panel/margin/vbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1440.0
+step = 360.0
+value = 720.0
+tick_count = 5
+
+[node name="agents" type="HBoxContainer" parent="ui/starting_panel/margin/vbox"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="ui/starting_panel/margin/vbox/agents"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Agents"
+
+[node name="amount" type="Label" parent="ui/starting_panel/margin/vbox/agents"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1048576"
+horizontal_alignment = 1
+
+[node name="agents_slider" type="HSlider" parent="ui/starting_panel/margin/vbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 18.0
+max_value = 22.0
+value = 20.0
+tick_count = 5
+
+[node name="separator3" type="HSeparator" parent="ui/starting_panel/margin/vbox"]
+layout_mode = 2
+
+[node name="hide_key" type="Label" parent="ui/starting_panel/margin/vbox"]
+layout_mode = 2
+size_flags_vertical = 10
+text = "Toggle UI with 'Space'"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="reset_key" type="Label" parent="ui/starting_panel/margin/vbox"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Reset Simulaton with 'R'"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="separator4" type="HSeparator" parent="ui/starting_panel/margin/vbox"]
+layout_mode = 2
+
+[node name="reset" type="Button" parent="ui/starting_panel/margin/vbox"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Reset Simulation"
+
+[node name="runtime_panel" type="PanelContainer" parent="ui"]
+offset_left = 793.0
+offset_top = 22.0
+offset_right = 1377.0
+offset_bottom = 368.0
+scale = Vector2(0.8, 0.8)
+
+[node name="margin" type="MarginContainer" parent="ui/runtime_panel"]
+layout_mode = 2
+
+[node name="vbox" type="VBoxContainer" parent="ui/runtime_panel/margin"]
+layout_mode = 2
+
+[node name="general" type="VBoxContainer" parent="ui/runtime_panel/margin/vbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="title" type="Label" parent="ui/runtime_panel/margin/vbox/general"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+text = "General Settings"
+horizontal_alignment = 1
+
+[node name="hbox" type="HBoxContainer" parent="ui/runtime_panel/margin/vbox/general"]
+layout_mode = 2
+
+[node name="left_vbox" type="VBoxContainer" parent="ui/runtime_panel/margin/vbox/general/hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="simulation_speed" type="HBoxContainer" parent="ui/runtime_panel/margin/vbox/general/hbox/left_vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="label" type="Label" parent="ui/runtime_panel/margin/vbox/general/hbox/left_vbox/simulation_speed"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Sim Speed"
+
+[node name="slider" type="HSlider" parent="ui/runtime_panel/margin/vbox/general/hbox/left_vbox/simulation_speed"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.1
+max_value = 1.9
+step = 0.01
+value = 1.0
+tick_count = 3
+
+[node name="decay" type="HBoxContainer" parent="ui/runtime_panel/margin/vbox/general/hbox/left_vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="label" type="Label" parent="ui/runtime_panel/margin/vbox/general/hbox/left_vbox/decay"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Decay Speed"
+
+[node name="slider" type="HSlider" parent="ui/runtime_panel/margin/vbox/general/hbox/left_vbox/decay"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.1
+max_value = 0.9
+step = 0.01
+value = 0.5
+tick_count = 3
+
+[node name="bg_color" type="HBoxContainer" parent="ui/runtime_panel/margin/vbox/general/hbox/left_vbox"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="ui/runtime_panel/margin/vbox/general/hbox/left_vbox/bg_color"]
+layout_mode = 2
+text = "Background Color"
+
+[node name="color_picker" type="ColorPickerButton" parent="ui/runtime_panel/margin/vbox/general/hbox/left_vbox/bg_color"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+edit_alpha = false
+
+[node name="filler" type="Control" parent="ui/runtime_panel/margin/vbox/general/hbox"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="right_vbox" type="VBoxContainer" parent="ui/runtime_panel/margin/vbox/general/hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="zoom" type="HBoxContainer" parent="ui/runtime_panel/margin/vbox/general/hbox/right_vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="label" type="Label" parent="ui/runtime_panel/margin/vbox/general/hbox/right_vbox/zoom"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Zoom"
+
+[node name="slider" type="HSlider" parent="ui/runtime_panel/margin/vbox/general/hbox/right_vbox/zoom"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.1
+max_value = 2.1
+step = 0.1
+value = 1.1
+tick_count = 3
+
+[node name="blur" type="HBoxContainer" parent="ui/runtime_panel/margin/vbox/general/hbox/right_vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="label" type="Label" parent="ui/runtime_panel/margin/vbox/general/hbox/right_vbox/blur"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Blur Speed"
+
+[node name="slider" type="HSlider" parent="ui/runtime_panel/margin/vbox/general/hbox/right_vbox/blur"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.1
+max_value = 12.0
+step = 0.1
+value = 6.0
+tick_count = 3
+
+[node name="fg_color" type="HBoxContainer" parent="ui/runtime_panel/margin/vbox/general/hbox/right_vbox"]
+layout_mode = 2
+
+[node name="label" type="Label" parent="ui/runtime_panel/margin/vbox/general/hbox/right_vbox/fg_color"]
+layout_mode = 2
+text = "Slime Mold Color"
+
+[node name="color_picker" type="ColorPickerButton" parent="ui/runtime_panel/margin/vbox/general/hbox/right_vbox/fg_color"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 1, 1)
+edit_alpha = false
+
+[node name="separator1" type="HSeparator" parent="ui/runtime_panel/margin/vbox"]
+layout_mode = 2
+
+[node name="player" type="VBoxContainer" parent="ui/runtime_panel/margin/vbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="title" type="Label" parent="ui/runtime_panel/margin/vbox/player"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+text = "Player Settings"
+horizontal_alignment = 1
+
+[node name="hbox" type="HBoxContainer" parent="ui/runtime_panel/margin/vbox/player"]
+layout_mode = 2
+
+[node name="left_vbox" type="VBoxContainer" parent="ui/runtime_panel/margin/vbox/player/hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="enabled" type="HBoxContainer" parent="ui/runtime_panel/margin/vbox/player/hbox/left_vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="label" type="Label" parent="ui/runtime_panel/margin/vbox/player/hbox/left_vbox/enabled"]
+layout_mode = 2
+text = "Enabled"
+
+[node name="filler" type="Control" parent="ui/runtime_panel/margin/vbox/player/hbox/left_vbox/enabled"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="switch" type="CheckButton" parent="ui/runtime_panel/margin/vbox/player/hbox/left_vbox/enabled"]
+layout_mode = 2
+
+[node name="trail" type="HBoxContainer" parent="ui/runtime_panel/margin/vbox/player/hbox/left_vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="label" type="Label" parent="ui/runtime_panel/margin/vbox/player/hbox/left_vbox/trail"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Trail Weight"
+
+[node name="slider" type="HSlider" parent="ui/runtime_panel/margin/vbox/player/hbox/left_vbox/trail"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.1
+max_value = 4.0
+step = 0.1
+value = 2.0
+tick_count = 3
+
+[node name="filler" type="Control" parent="ui/runtime_panel/margin/vbox/player/hbox"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="right_vbox" type="VBoxContainer" parent="ui/runtime_panel/margin/vbox/player/hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="speed" type="HBoxContainer" parent="ui/runtime_panel/margin/vbox/player/hbox/right_vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="label" type="Label" parent="ui/runtime_panel/margin/vbox/player/hbox/right_vbox/speed"]
+layout_mode = 2
+text = "Speed"
+
+[node name="filler" type="Control" parent="ui/runtime_panel/margin/vbox/player/hbox/right_vbox/speed"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="spinbox" type="SpinBox" parent="ui/runtime_panel/margin/vbox/player/hbox/right_vbox/speed"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+min_value = 1.0
+max_value = 400.0
+value = 300.0
+alignment = 2
+suffix = "px/s"
+custom_arrow_step = 10.0
+
+[node name="radius" type="HBoxContainer" parent="ui/runtime_panel/margin/vbox/player/hbox/right_vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="label" type="Label" parent="ui/runtime_panel/margin/vbox/player/hbox/right_vbox/radius"]
+layout_mode = 2
+text = "Trail Radius"
+
+[node name="filler" type="Control" parent="ui/runtime_panel/margin/vbox/player/hbox/right_vbox/radius"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="spinbox" type="SpinBox" parent="ui/runtime_panel/margin/vbox/player/hbox/right_vbox/radius"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+min_value = 1.0
+max_value = 200.0
+value = 50.0
+alignment = 2
+suffix = "px"
+custom_arrow_step = 5.0
+
+[node name="separator2" type="HSeparator" parent="ui/runtime_panel/margin/vbox"]
+layout_mode = 2
+
+[node name="agent" type="VBoxContainer" parent="ui/runtime_panel/margin/vbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="title" type="Label" parent="ui/runtime_panel/margin/vbox/agent"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+text = "Agent Settings"
+horizontal_alignment = 1
+
+[node name="hbox" type="HBoxContainer" parent="ui/runtime_panel/margin/vbox/agent"]
+layout_mode = 2
+
+[node name="left_vbox" type="VBoxContainer" parent="ui/runtime_panel/margin/vbox/agent/hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="speed" type="HBoxContainer" parent="ui/runtime_panel/margin/vbox/agent/hbox/left_vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="label" type="Label" parent="ui/runtime_panel/margin/vbox/agent/hbox/left_vbox/speed"]
+layout_mode = 2
+text = "Speed"
+
+[node name="filler" type="Control" parent="ui/runtime_panel/margin/vbox/agent/hbox/left_vbox/speed"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="spinbox" type="SpinBox" parent="ui/runtime_panel/margin/vbox/agent/hbox/left_vbox/speed"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+min_value = 1.0
+value = 30.0
+alignment = 2
+suffix = "px/s"
+custom_arrow_step = 5.0
+
+[node name="lookahead" type="HBoxContainer" parent="ui/runtime_panel/margin/vbox/agent/hbox/left_vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="label" type="Label" parent="ui/runtime_panel/margin/vbox/agent/hbox/left_vbox/lookahead"]
+layout_mode = 2
+text = "Sight Distance"
+
+[node name="filler" type="Control" parent="ui/runtime_panel/margin/vbox/agent/hbox/left_vbox/lookahead"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="spinbox" type="SpinBox" parent="ui/runtime_panel/margin/vbox/agent/hbox/left_vbox/lookahead"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+min_value = 1.0
+max_value = 80.0
+value = 40.0
+alignment = 2
+suffix = "px"
+custom_arrow_step = 5.0
+
+[node name="trail" type="HBoxContainer" parent="ui/runtime_panel/margin/vbox/agent/hbox/left_vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="label" type="Label" parent="ui/runtime_panel/margin/vbox/agent/hbox/left_vbox/trail"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Trail Weight"
+
+[node name="slider" type="HSlider" parent="ui/runtime_panel/margin/vbox/agent/hbox/left_vbox/trail"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.1
+max_value = 4.0
+step = 0.1
+value = 2.0
+tick_count = 3
+
+[node name="filler" type="Control" parent="ui/runtime_panel/margin/vbox/agent/hbox"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="right_vbox" type="VBoxContainer" parent="ui/runtime_panel/margin/vbox/agent/hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="turn_speed" type="HBoxContainer" parent="ui/runtime_panel/margin/vbox/agent/hbox/right_vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="label" type="Label" parent="ui/runtime_panel/margin/vbox/agent/hbox/right_vbox/turn_speed"]
+layout_mode = 2
+text = "Turn Speed"
+
+[node name="filler" type="Control" parent="ui/runtime_panel/margin/vbox/agent/hbox/right_vbox/turn_speed"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="spinbox" type="SpinBox" parent="ui/runtime_panel/margin/vbox/agent/hbox/right_vbox/turn_speed"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+step = 0.1
+value = 4.0
+alignment = 2
+suffix = "rad/s"
+custom_arrow_step = 1.0
+
+[node name="fov" type="HBoxContainer" parent="ui/runtime_panel/margin/vbox/agent/hbox/right_vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="label" type="Label" parent="ui/runtime_panel/margin/vbox/agent/hbox/right_vbox/fov"]
+layout_mode = 2
+text = "Sight FOV"
+
+[node name="filler" type="Control" parent="ui/runtime_panel/margin/vbox/agent/hbox/right_vbox/fov"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="spinbox" type="SpinBox" parent="ui/runtime_panel/margin/vbox/agent/hbox/right_vbox/fov"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+min_value = 1.0
+max_value = 90.0
+value = 30.0
+alignment = 2
+suffix = "°"
+custom_arrow_step = 5.0
+
+[node name="sensor" type="HBoxContainer" parent="ui/runtime_panel/margin/vbox/agent/hbox/right_vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="label" type="Label" parent="ui/runtime_panel/margin/vbox/agent/hbox/right_vbox/sensor"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Sensor Size"
+
+[node name="slider" type="HSlider" parent="ui/runtime_panel/margin/vbox/agent/hbox/right_vbox/sensor"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 2.0
+value = 1.0
+tick_count = 3
+
+[connection signal="item_selected" from="ui/starting_panel/margin/vbox/start_position_options" to="." method="start_position_option_selected"]
+[connection signal="item_selected" from="ui/starting_panel/margin/vbox/start_angle_options" to="." method="start_angle_option_selected"]
+[connection signal="value_changed" from="ui/starting_panel/margin/vbox/screen_size_slider" to="." method="screen_size_changed"]
+[connection signal="value_changed" from="ui/starting_panel/margin/vbox/agents_slider" to="." method="number_of_agents_changed"]
+[connection signal="pressed" from="ui/starting_panel/margin/vbox/reset" to="." method="reset_pressed"]
+[connection signal="value_changed" from="ui/runtime_panel/margin/vbox/general/hbox/left_vbox/simulation_speed/slider" to="." method="simulation_speed_changed"]
+[connection signal="value_changed" from="ui/runtime_panel/margin/vbox/general/hbox/left_vbox/decay/slider" to="." method="decay_speed_changed"]
+[connection signal="color_changed" from="ui/runtime_panel/margin/vbox/general/hbox/left_vbox/bg_color/color_picker" to="." method="bg_color_changed"]
+[connection signal="value_changed" from="ui/runtime_panel/margin/vbox/general/hbox/right_vbox/zoom/slider" to="." method="zoom_changed"]
+[connection signal="value_changed" from="ui/runtime_panel/margin/vbox/general/hbox/right_vbox/blur/slider" to="." method="blur_speed_changed"]
+[connection signal="color_changed" from="ui/runtime_panel/margin/vbox/general/hbox/right_vbox/fg_color/color_picker" to="." method="fg_color_changed"]
+[connection signal="toggled" from="ui/runtime_panel/margin/vbox/player/hbox/left_vbox/enabled/switch" to="." method="player_switch_toggled"]
+[connection signal="value_changed" from="ui/runtime_panel/margin/vbox/player/hbox/left_vbox/trail/slider" to="." method="player_trail_weight_changed"]
+[connection signal="value_changed" from="ui/runtime_panel/margin/vbox/player/hbox/right_vbox/speed/spinbox" to="." method="player_speed_changed"]
+[connection signal="value_changed" from="ui/runtime_panel/margin/vbox/player/hbox/right_vbox/radius/spinbox" to="." method="player_trail_radius_changed"]
+[connection signal="value_changed" from="ui/runtime_panel/margin/vbox/agent/hbox/left_vbox/speed/spinbox" to="." method="agent_speed_changed"]
+[connection signal="value_changed" from="ui/runtime_panel/margin/vbox/agent/hbox/left_vbox/lookahead/spinbox" to="." method="agent_lookahead_changed"]
+[connection signal="value_changed" from="ui/runtime_panel/margin/vbox/agent/hbox/left_vbox/trail/slider" to="." method="agent_trail_weight_changed"]
+[connection signal="value_changed" from="ui/runtime_panel/margin/vbox/agent/hbox/right_vbox/turn_speed/spinbox" to="." method="agent_turn_speed_changed"]
+[connection signal="value_changed" from="ui/runtime_panel/margin/vbox/agent/hbox/right_vbox/fov/spinbox" to="." method="agent_fov_changed"]
+[connection signal="value_changed" from="ui/runtime_panel/margin/vbox/agent/hbox/right_vbox/sensor/slider" to="." method="agent_sensor_size_changed"]

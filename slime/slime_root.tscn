@@ -1,0 +1,578 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxena148uhb2t"]
+
+[ext_resource type="Script" path="res://slime/slime_root.gd" id="1_jgxsl"]
+[ext_resource type="Material" uid="uid://cb3daufwl4lqb" path="res://resources/materials/color-map.material" id="2_h80kl"]
+[ext_resource type="Script" path="res://slime/slime.gd" id="3_l58kq"]
+[ext_resource type="Script" path="res://slime/utils/player.gd" id="4_du2cj"]
+[ext_resource type="Script" path="res://slime/utils/agents.gd" id="5_2puxf"]
+
+[sub_resource type="Texture2DRD" id="Texture2DRD_cjylm"]
+
+[node name="SlimeRoot" type="Node2D"]
+script = ExtResource("1_jgxsl")
+
+[node name="Slime" type="Sprite2D" parent="."]
+material = ExtResource("2_h80kl")
+texture = SubResource("Texture2DRD_cjylm")
+script = ExtResource("3_l58kq")
+
+[node name="Camera" type="Camera2D" parent="Slime"]
+zoom = Vector2(1.1, 1.1)
+
+[node name="Player" type="Node" parent="Slime"]
+script = ExtResource("4_du2cj")
+
+[node name="Agents" type="Node" parent="Slime"]
+script = ExtResource("5_2puxf")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="StartingPanel" type="PanelContainer" parent="UI"]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 234.0
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="UI/StartingPanel"]
+layout_mode = 2
+
+[node name="Starting" type="VBoxContainer" parent="UI/StartingPanel/Margin"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Title" type="Label" parent="UI/StartingPanel/Margin/Starting"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Initial Parameters"
+horizontal_alignment = 1
+
+[node name="Separator" type="HSeparator" parent="UI/StartingPanel/Margin/Starting"]
+layout_mode = 2
+
+[node name="StartPosition" type="Label" parent="UI/StartingPanel/Margin/Starting"]
+layout_mode = 2
+text = "Starting Positions"
+
+[node name="StartPositionOptions" type="OptionButton" parent="UI/StartingPanel/Margin/Starting"]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 3
+popup/item_0/text = "Disk"
+popup/item_1/text = "Rectangle"
+popup/item_1/id = 1
+popup/item_2/text = "Single Point"
+popup/item_2/id = 2
+
+[node name="StartAngle" type="Label" parent="UI/StartingPanel/Margin/Starting"]
+layout_mode = 2
+text = "Starting Angles"
+
+[node name="StartAngleOptions" type="OptionButton" parent="UI/StartingPanel/Margin/Starting"]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 3
+popup/item_0/text = "Towards Center"
+popup/item_1/text = "Away From Center"
+popup/item_1/id = 1
+popup/item_2/text = "Random"
+popup/item_2/id = 2
+
+[node name="Separator2" type="HSeparator" parent="UI/StartingPanel/Margin/Starting"]
+layout_mode = 2
+
+[node name="ScreenSize" type="HBoxContainer" parent="UI/StartingPanel/Margin/Starting"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/StartingPanel/Margin/Starting/ScreenSize"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Screen Size"
+
+[node name="Resolution" type="Label" parent="UI/StartingPanel/Margin/Starting/ScreenSize"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1280 x 720"
+horizontal_alignment = 1
+
+[node name="ScreenSizeSlider" type="HSlider" parent="UI/StartingPanel/Margin/Starting"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1440.0
+step = 360.0
+value = 720.0
+tick_count = 5
+
+[node name="Agents" type="HBoxContainer" parent="UI/StartingPanel/Margin/Starting"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/StartingPanel/Margin/Starting/Agents"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Agents"
+
+[node name="Amount" type="Label" parent="UI/StartingPanel/Margin/Starting/Agents"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1048576"
+horizontal_alignment = 1
+
+[node name="AgentsSlider" type="HSlider" parent="UI/StartingPanel/Margin/Starting"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 18.0
+max_value = 22.0
+value = 20.0
+tick_count = 5
+
+[node name="Separator3" type="HSeparator" parent="UI/StartingPanel/Margin/Starting"]
+layout_mode = 2
+
+[node name="HideKey" type="Label" parent="UI/StartingPanel/Margin/Starting"]
+layout_mode = 2
+size_flags_vertical = 10
+text = "Toggle UI with 'Space'"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ResetKey" type="Label" parent="UI/StartingPanel/Margin/Starting"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Reset Simulaton with 'R'"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Separator4" type="HSeparator" parent="UI/StartingPanel/Margin/Starting"]
+layout_mode = 2
+
+[node name="Reset" type="Button" parent="UI/StartingPanel/Margin/Starting"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Reset Simulation"
+
+[node name="RunTimePanel" type="PanelContainer" parent="UI"]
+offset_left = 793.0
+offset_top = 22.0
+offset_right = 1377.0
+offset_bottom = 368.0
+scale = Vector2(0.8, 0.8)
+
+[node name="Margin" type="MarginContainer" parent="UI/RunTimePanel"]
+layout_mode = 2
+
+[node name="RunTime" type="VBoxContainer" parent="UI/RunTimePanel/Margin"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="General" type="VBoxContainer" parent="UI/RunTimePanel/Margin/RunTime"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="UI/RunTimePanel/Margin/RunTime/General"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+text = "General Settings"
+horizontal_alignment = 1
+
+[node name="HBox" type="HBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/General"]
+layout_mode = 2
+
+[node name="LeftVBox" type="VBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/General/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SimulationSpeed" type="HBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/General/HBox/LeftVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UI/RunTimePanel/Margin/RunTime/General/HBox/LeftVBox/SimulationSpeed"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Sim Speed"
+
+[node name="Slider" type="HSlider" parent="UI/RunTimePanel/Margin/RunTime/General/HBox/LeftVBox/SimulationSpeed"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.1
+max_value = 1.9
+step = 0.01
+value = 1.0
+tick_count = 3
+
+[node name="Decay" type="HBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/General/HBox/LeftVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UI/RunTimePanel/Margin/RunTime/General/HBox/LeftVBox/Decay"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Decay Speed"
+
+[node name="Slider" type="HSlider" parent="UI/RunTimePanel/Margin/RunTime/General/HBox/LeftVBox/Decay"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.1
+max_value = 0.9
+step = 0.01
+value = 0.5
+tick_count = 3
+
+[node name="BGColor" type="HBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/General/HBox/LeftVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/RunTimePanel/Margin/RunTime/General/HBox/LeftVBox/BGColor"]
+layout_mode = 2
+text = "Background Color"
+
+[node name="ColorPicker" type="ColorPickerButton" parent="UI/RunTimePanel/Margin/RunTime/General/HBox/LeftVBox/BGColor"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+edit_alpha = false
+
+[node name="Filler" type="Control" parent="UI/RunTimePanel/Margin/RunTime/General/HBox"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="RightVBox" type="VBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/General/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Zoom" type="HBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/General/HBox/RightVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UI/RunTimePanel/Margin/RunTime/General/HBox/RightVBox/Zoom"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Zoom"
+
+[node name="Slider" type="HSlider" parent="UI/RunTimePanel/Margin/RunTime/General/HBox/RightVBox/Zoom"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.1
+max_value = 2.1
+step = 0.1
+value = 1.1
+tick_count = 3
+
+[node name="Blur" type="HBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/General/HBox/RightVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UI/RunTimePanel/Margin/RunTime/General/HBox/RightVBox/Blur"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Blur Speed"
+
+[node name="Slider" type="HSlider" parent="UI/RunTimePanel/Margin/RunTime/General/HBox/RightVBox/Blur"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.1
+max_value = 12.0
+step = 0.1
+value = 6.0
+tick_count = 3
+
+[node name="FGColor" type="HBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/General/HBox/RightVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/RunTimePanel/Margin/RunTime/General/HBox/RightVBox/FGColor"]
+layout_mode = 2
+text = "Slime Mold Color"
+
+[node name="ColorPicker" type="ColorPickerButton" parent="UI/RunTimePanel/Margin/RunTime/General/HBox/RightVBox/FGColor"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 1, 1)
+edit_alpha = false
+
+[node name="Separator1" type="HSeparator" parent="UI/RunTimePanel/Margin/RunTime"]
+layout_mode = 2
+
+[node name="Player" type="VBoxContainer" parent="UI/RunTimePanel/Margin/RunTime"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="UI/RunTimePanel/Margin/RunTime/Player"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+text = "Player Settings"
+horizontal_alignment = 1
+
+[node name="HBox" type="HBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/Player"]
+layout_mode = 2
+
+[node name="LeftVBox" type="VBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/Player/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Enabled" type="HBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/Player/HBox/LeftVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UI/RunTimePanel/Margin/RunTime/Player/HBox/LeftVBox/Enabled"]
+layout_mode = 2
+text = "Enabled"
+
+[node name="Filler" type="Control" parent="UI/RunTimePanel/Margin/RunTime/Player/HBox/LeftVBox/Enabled"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Switch" type="CheckButton" parent="UI/RunTimePanel/Margin/RunTime/Player/HBox/LeftVBox/Enabled"]
+layout_mode = 2
+
+[node name="Trail" type="HBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/Player/HBox/LeftVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UI/RunTimePanel/Margin/RunTime/Player/HBox/LeftVBox/Trail"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Trail Weight"
+
+[node name="Slider" type="HSlider" parent="UI/RunTimePanel/Margin/RunTime/Player/HBox/LeftVBox/Trail"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.1
+max_value = 4.0
+step = 0.1
+value = 2.0
+tick_count = 3
+
+[node name="Filler" type="Control" parent="UI/RunTimePanel/Margin/RunTime/Player/HBox"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="RightVBox" type="VBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/Player/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Speed" type="HBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/Player/HBox/RightVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UI/RunTimePanel/Margin/RunTime/Player/HBox/RightVBox/Speed"]
+layout_mode = 2
+text = "Speed"
+
+[node name="Filler" type="Control" parent="UI/RunTimePanel/Margin/RunTime/Player/HBox/RightVBox/Speed"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpinBox" type="SpinBox" parent="UI/RunTimePanel/Margin/RunTime/Player/HBox/RightVBox/Speed"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+min_value = 1.0
+max_value = 400.0
+value = 300.0
+alignment = 2
+suffix = "px/s"
+custom_arrow_step = 10.0
+
+[node name="Radius" type="HBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/Player/HBox/RightVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UI/RunTimePanel/Margin/RunTime/Player/HBox/RightVBox/Radius"]
+layout_mode = 2
+text = "Trail Radius"
+
+[node name="Filler" type="Control" parent="UI/RunTimePanel/Margin/RunTime/Player/HBox/RightVBox/Radius"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpinBox" type="SpinBox" parent="UI/RunTimePanel/Margin/RunTime/Player/HBox/RightVBox/Radius"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+min_value = 1.0
+max_value = 200.0
+value = 50.0
+alignment = 2
+suffix = "px"
+custom_arrow_step = 5.0
+
+[node name="Separator2" type="HSeparator" parent="UI/RunTimePanel/Margin/RunTime"]
+layout_mode = 2
+
+[node name="Agent" type="VBoxContainer" parent="UI/RunTimePanel/Margin/RunTime"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="UI/RunTimePanel/Margin/RunTime/Agent"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+text = "Agent Settings"
+horizontal_alignment = 1
+
+[node name="HBox" type="HBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/Agent"]
+layout_mode = 2
+
+[node name="LeftVBox" type="VBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Speed" type="HBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox/LeftVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox/LeftVBox/Speed"]
+layout_mode = 2
+text = "Speed"
+
+[node name="Filler" type="Control" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox/LeftVBox/Speed"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpinBox" type="SpinBox" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox/LeftVBox/Speed"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+min_value = 1.0
+value = 30.0
+alignment = 2
+suffix = "px/s"
+custom_arrow_step = 5.0
+
+[node name="LookAhead" type="HBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox/LeftVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox/LeftVBox/LookAhead"]
+layout_mode = 2
+text = "Sight Distance"
+
+[node name="Filler" type="Control" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox/LeftVBox/LookAhead"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpinBox" type="SpinBox" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox/LeftVBox/LookAhead"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+min_value = 1.0
+max_value = 80.0
+value = 40.0
+alignment = 2
+suffix = "px"
+custom_arrow_step = 5.0
+
+[node name="Trail" type="HBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox/LeftVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox/LeftVBox/Trail"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Trail Weight"
+
+[node name="Slider" type="HSlider" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox/LeftVBox/Trail"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.1
+max_value = 4.0
+step = 0.1
+value = 2.0
+tick_count = 3
+
+[node name="Filler" type="Control" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="RightVBox" type="VBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TurnSpeed" type="HBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox/RightVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox/RightVBox/TurnSpeed"]
+layout_mode = 2
+text = "Turn Speed"
+
+[node name="Filler" type="Control" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox/RightVBox/TurnSpeed"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpinBox" type="SpinBox" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox/RightVBox/TurnSpeed"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+step = 0.1
+value = 4.0
+alignment = 2
+suffix = "rad/s"
+custom_arrow_step = 1.0
+
+[node name="FOV" type="HBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox/RightVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox/RightVBox/FOV"]
+layout_mode = 2
+text = "Sight FOV"
+
+[node name="Filler" type="Control" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox/RightVBox/FOV"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpinBox" type="SpinBox" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox/RightVBox/FOV"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+min_value = 1.0
+max_value = 90.0
+value = 30.0
+alignment = 2
+suffix = "°"
+custom_arrow_step = 5.0
+
+[node name="Sensor" type="HBoxContainer" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox/RightVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox/RightVBox/Sensor"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Sensor Size"
+
+[node name="Slider" type="HSlider" parent="UI/RunTimePanel/Margin/RunTime/Agent/HBox/RightVBox/Sensor"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 2.0
+value = 1.0
+tick_count = 3
+
+[connection signal="item_selected" from="UI/StartingPanel/Margin/Starting/StartPositionOptions" to="." method="start_position_option_selected"]
+[connection signal="item_selected" from="UI/StartingPanel/Margin/Starting/StartAngleOptions" to="." method="start_angle_option_selected"]
+[connection signal="value_changed" from="UI/StartingPanel/Margin/Starting/ScreenSizeSlider" to="." method="screen_size_changed"]
+[connection signal="value_changed" from="UI/StartingPanel/Margin/Starting/AgentsSlider" to="." method="number_of_agents_changed"]
+[connection signal="pressed" from="UI/StartingPanel/Margin/Starting/Reset" to="." method="reset_pressed"]
+[connection signal="value_changed" from="UI/RunTimePanel/Margin/RunTime/General/HBox/LeftVBox/SimulationSpeed/Slider" to="." method="simulation_speed_changed"]
+[connection signal="value_changed" from="UI/RunTimePanel/Margin/RunTime/General/HBox/LeftVBox/Decay/Slider" to="." method="decay_speed_changed"]
+[connection signal="color_changed" from="UI/RunTimePanel/Margin/RunTime/General/HBox/LeftVBox/BGColor/ColorPicker" to="." method="bg_color_changed"]
+[connection signal="value_changed" from="UI/RunTimePanel/Margin/RunTime/General/HBox/RightVBox/Zoom/Slider" to="." method="zoom_changed"]
+[connection signal="value_changed" from="UI/RunTimePanel/Margin/RunTime/General/HBox/RightVBox/Blur/Slider" to="." method="blur_speed_changed"]
+[connection signal="color_changed" from="UI/RunTimePanel/Margin/RunTime/General/HBox/RightVBox/FGColor/ColorPicker" to="." method="fg_color_changed"]
+[connection signal="toggled" from="UI/RunTimePanel/Margin/RunTime/Player/HBox/LeftVBox/Enabled/Switch" to="." method="player_switch_toggled"]
+[connection signal="value_changed" from="UI/RunTimePanel/Margin/RunTime/Player/HBox/LeftVBox/Trail/Slider" to="." method="player_trail_weight_changed"]
+[connection signal="value_changed" from="UI/RunTimePanel/Margin/RunTime/Player/HBox/RightVBox/Speed/SpinBox" to="." method="player_speed_changed"]
+[connection signal="value_changed" from="UI/RunTimePanel/Margin/RunTime/Player/HBox/RightVBox/Radius/SpinBox" to="." method="player_trail_radius_changed"]
+[connection signal="value_changed" from="UI/RunTimePanel/Margin/RunTime/Agent/HBox/LeftVBox/Speed/SpinBox" to="." method="agent_speed_changed"]
+[connection signal="value_changed" from="UI/RunTimePanel/Margin/RunTime/Agent/HBox/LeftVBox/LookAhead/SpinBox" to="." method="agent_lookahead_changed"]
+[connection signal="value_changed" from="UI/RunTimePanel/Margin/RunTime/Agent/HBox/LeftVBox/Trail/Slider" to="." method="agent_trail_weight_changed"]
+[connection signal="value_changed" from="UI/RunTimePanel/Margin/RunTime/Agent/HBox/RightVBox/TurnSpeed/SpinBox" to="." method="agent_turn_speed_changed"]
+[connection signal="value_changed" from="UI/RunTimePanel/Margin/RunTime/Agent/HBox/RightVBox/FOV/SpinBox" to="." method="agent_fov_changed"]
+[connection signal="value_changed" from="UI/RunTimePanel/Margin/RunTime/Agent/HBox/RightVBox/Sensor/Slider" to="." method="agent_sensor_size_changed"]

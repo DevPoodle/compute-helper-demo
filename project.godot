@@ -14,9 +14,13 @@ config/name="Compute-Helper Demo"
 config/description="A demo of my compute-helper plugin running a slime-mold simulation."
 config/version="1.0"
 config/tags=PackedStringArray("educational")
-run/main_scene="res://slime/slime-root.tscn"
+run/main_scene="res://slime/slime_root.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 run/max_fps=60
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="res://resources/theme/logo.png"
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://resources/theme/logo.png"
 
 [debug]
@@ -82,5 +86,4 @@ HIDE={
 [rendering]
 
 driver/depth_prepass/enable=false
-anti_aliasing/screen_space_roughness_limiter/enabled=false
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)

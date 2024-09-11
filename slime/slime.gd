@@ -72,6 +72,9 @@ func initialize_compute_shaders() -> void:
 	
 	agent_compute_shader.add_uniform_array([agent_parameters_buffer, agent_buffer, input_texture, halfway_texture])
 	texture_compute_shader.add_uniform_array([texture_parameters_buffer, halfway_texture, output_texture])
+	
+	var sampler := SamplerUniform.create(image)
+	print(sampler is SamplerUniform)
 
 func update_compute_shaders(delta : float) -> void:
 	if player_enabled:
@@ -114,5 +117,5 @@ func reset_simulation() -> void:
 	agent_buffer.update_data($agents.get_created_agents())
 
 func end_compute_shaders() -> void:
-	agent_compute_shader.queue_free()
-	texture_compute_shader.queue_free()
+	agent_compute_shader.free()
+	texture_compute_shader.free()
